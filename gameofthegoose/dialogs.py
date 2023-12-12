@@ -7,8 +7,8 @@ from PySide6.QtWidgets import QGraphicsTextItem, QGraphicsProxyWidget, QRadioBut
     QSpinBox, QDialogButtonBox, QMessageBox
 
 if TYPE_CHECKING:
-    from giocodelloca.boxes import Quiz, Challenge
-    from giocodelloca.giocodelloca import Team
+    from gameofthegoose.boxes import Quiz, Challenge
+    from gameofthegoose.giocodelloca import Team
 
 
 class Dialog(QDialog):

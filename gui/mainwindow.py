@@ -1,8 +1,8 @@
 from PySide6.QtGui import QPixmap, QColor
 from PySide6.QtWidgets import QMainWindow, QApplication, QGraphicsScene
 
-from giocodelloca import Game, SkipTurnBox, RollTheDiceAgainBox, ChallengeBox, QuizBox
-from giocodelloca.giocodelloca import Quiz, Team
+from gameofthegoose import Game, SkipTurnBox, RollTheDiceAgainBox, ChallengeBox, QuizBox
+from gameofthegoose.giocodelloca import Quiz, Team
 
 from gui.controllerdialog import ControllerDialog
 from gui.teamdialog import TeamDialog

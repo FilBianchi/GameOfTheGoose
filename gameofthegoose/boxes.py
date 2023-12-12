@@ -6,10 +6,10 @@ from PySide6.QtGui import QPixmap, QPen, QBrush, QColor
 from PySide6.QtWidgets import QGraphicsItemGroup, QGraphicsItem, QGraphicsRectItem, QGraphicsTextItem, \
     QGraphicsPixmapItem
 
-from giocodelloca.dialogs import QuizDialog, ChallengeDialog
+from gameofthegoose.dialogs import QuizDialog, ChallengeDialog
 
 if TYPE_CHECKING:
-    from giocodelloca.teams import Team
+    from gameofthegoose.teams import Team
 
 
 class Quiz:

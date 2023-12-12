@@ -8,10 +8,10 @@ from PySide6.QtWidgets import QGraphicsScene, QGraphicsLineItem, QGraphicsItem, 
     QGraphicsTextItem, QGraphicsPixmapItem, QGraphicsEllipseItem, QGraphicsWidget, QGraphicsProxyWidget, QRadioButton
 from PySide6.QtXml import QDomDocument, QDomElement
 
-from giocodelloca.boxes import Box, StartBox, FinishBox, Quiz, QuizBox, Challenge, ChallengeBox, SkipTurnBox, \
+from gameofthegoose.boxes import Box, StartBox, FinishBox, Quiz, QuizBox, Challenge, ChallengeBox, SkipTurnBox, \
     RollTheDiceAgainBox
-from giocodelloca.dialogs import RollTheDiceDialog, QuizDialog, SkipTheTurnDialog, YesDialog, NoDialog
-from giocodelloca.teams import Team
+from gameofthegoose.dialogs import RollTheDiceDialog, QuizDialog, SkipTheTurnDialog, YesDialog, NoDialog
+from gameofthegoose.teams import Team
 
 
 class Game(QGraphicsItemGroup):

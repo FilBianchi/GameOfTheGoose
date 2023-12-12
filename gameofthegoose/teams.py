@@ -5,7 +5,7 @@ from PySide6.QtGui import QBrush, QPixmap, QColor
 from PySide6.QtWidgets import QGraphicsEllipseItem, QGraphicsItemGroup, QGraphicsPixmapItem
 
 if TYPE_CHECKING:
-    from giocodelloca.boxes import Box
+    from gameofthegoose.boxes import Box
 
 
 class Team(QGraphicsItemGroup):

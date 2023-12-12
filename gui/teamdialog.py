@@ -4,7 +4,7 @@ from PySide6.QtCore import QAbstractTableModel, QModelIndex, QPersistentModelInd
 from PySide6.QtGui import QAction, QBrush
 from PySide6.QtWidgets import QDialog, QStyledItemDelegate, QWidget, QStyleOptionViewItem, QColorDialog
 
-from giocodelloca.teams import Team
+from gameofthegoose.teams import Team
 from gui.icondialog import IconDialog
 from gui.ui_teamdialog import Ui_TeamDialog
 
