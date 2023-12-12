@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/game_background.jpg</file>
+        <file>images/message_background.png</file>
+        <file>images/yes.gif</file>
+        <file>images/no.jpg</file>
+        <file>images/boxes/dice.png</file>
+        <file>images/boxes/finish.jpg</file>
+        <file>images/boxes/medal.png</file>
+        <file>images/boxes/question_mark.png</file>
+        <file>images/boxes/rest.png</file>
+        <file>images/boxes/start.png</file>
+        <file>images/teams/compass.png</file>
+        <file>images/teams/helmet.png</file>
+        <file>images/teams/jacket.png</file>
+        <file>images/teams/locker.png</file>
+        <file>images/teams/map.png</file>
+        <file>images/teams/photo.png</file>
+        <file>images/teams/picca.png</file>
+        <file>images/teams/radio.png</file>
+        <file>images/teams/rope.png</file>
+        <file>images/teams/shoes.png</file>
+    </qresource>
+</RCC>

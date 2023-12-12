@@ -1,0 +1,94 @@
+<game>
+	<start>
+	</start>
+	<quiz question="Qual è la montagna più alta dei Pirenei?">
+		<answer text="Macizo de la maladeta *" />
+		<answer text="Moncayo" />
+		<answer text="Aizkorri" />
+		<answer text="Comabona" />
+	</quiz>
+	<rollthediceagain>
+	</rollthediceagain>
+	<quiz question="Anno della prima ascesa dell'Everest?">
+		<answer text="1947" />
+		<answer text="1949" />
+		<answer text="1953 *" />
+		<answer text="1957" />
+	</quiz>
+	<challenge text="Scrivere correttamente il nome della terza montagna della terra (concenganga) " />
+	<quiz question="Altezza massima del Monte Rosa?">
+		<answer text="4554m" />
+		<answer text="4615m" />
+		<answer text="4637m *" />
+		<answer text="4701m" />
+	</quiz>
+	<skiptheturn>
+	</skiptheturn>
+	<quiz question="Quanti sono i corni del Monte Barro?">
+		<answer text="2" />
+		<answer text="3 *" />
+		<answer text="4" />
+	</quiz>
+	<challenge text="Sbrogliate le mezze corde in meno di 5min" />
+	<quiz question="Da dove deriva nome monte Rosa?">
+		<answer text="Tinta rosa alba" />
+		<answer text="Dal latino rosia, ghiacciaio *" />
+		<answer text="Trascrizione errata monte bosa" />
+	</quiz>
+	<rollthediceagain>
+	</rollthediceagain>
+	<quiz question="Primo salitore del cervino?">
+		<answer text="Edoardo Whymper *" />
+		<answer text="Edmund Hillary" />
+		<answer text="Jean Antoine Carrel" />
+	</quiz>
+	<challenge text="Un elemento prescelto della squadra deve indossare un kit da ferrata in meno di 1min" />
+	<quiz question="Qual’è la cima più alta (tra queste vette del Resegone)?">
+		<answer text="Punta Manzoni" />
+		<answer text="Punta Stoppani" />
+		<answer text="Torre di Valnegra" />
+		<answer text="Pizzo Daina *" />
+	</quiz>
+	<skiptheturn>
+	</skiptheturn>
+	<quiz question="In che anno la coppia Meroi-Benet ha completato i 14 Ottomila?">
+		<answer text="2015" />
+		<answer text="2016" />
+		<answer text="2017 *" />
+	</quiz>
+	<challenge text="Individuate bendati i seguenti shottini" />
+	<quiz question="Chi era lo scalatore italiano soprannominato “il Re delle Alpi”?">
+		<answer text="Ardito Desio" />
+		<answer text="Riccardo Cassin" />
+		<answer text="Walter Bonatti *" />
+		<answer text="Achille Compagnoni" />
+	</quiz>
+	<rollthediceagain>
+	</rollthediceagain>
+	<quiz question="Per quanti km si estendono le alpi italiane?">
+		<answer text="1200 *" />
+		<answer text="1500" />
+		<answer text="1800" />
+	</quiz>
+	<challenge text="Bendati, fare un catena di rinvii" />
+	<quiz question="Il Monte Cimone in che regione si trova?">
+		<answer text="Piemonte" />
+		<answer text="Liguria" />
+		<answer text="Emilia Romagna *" />
+	</quiz>
+	<skiptheturn>
+	</skiptheturn>
+	<quiz question="Dov'è stato trovato il cosiddetto “uomo del Similaun”?">
+		<answer text="Austria" />
+		<answer text="Alto Adige *" />
+		<answer text="Slovenia" />
+	</quiz>
+	<challenge text="Bendati, identificare i seguenti oggetti" />
+	<quiz question="In che anno è stato fondato il CAI?">
+		<answer text="1912" />
+		<answer text="1897" />
+		<answer text="1863 *" />
+	</quiz>
+	<finish>
+	</finish>
+</game>
