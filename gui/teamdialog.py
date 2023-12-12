@@ -111,7 +111,7 @@ class TeamDialog(QDialog, Ui_TeamDialog):
         self.tableView.doubleClicked.connect(self.__on_table_view_double_clicked)
 
     def __on_add_team_triggered(self):
-        self.__model.insertRow(0)
+        self.__model.insertRow(self.__model.rowCount())
 
     def __on_remove_team_triggered(self):
         pass

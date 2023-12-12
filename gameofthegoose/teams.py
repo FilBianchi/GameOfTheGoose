@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
+from PySide6.QtCore import QSize
 from PySide6.QtGui import QBrush, QPixmap, QColor
 from PySide6.QtWidgets import QGraphicsEllipseItem, QGraphicsItemGroup, QGraphicsPixmapItem
 
@@ -40,7 +41,7 @@ class Team(QGraphicsItemGroup):
         return self.__color
 
     def init_graphics(self, size):
-        if self.__pixmap is not None:
+        if (self.__pixmap is not None) and (self.__pixmap.size() != QSize(0, 0)):
             pixmap_item = QGraphicsPixmapItem(self.__pixmap)
             sx = size / pixmap_item.boundingRect().width()
             sy = size / pixmap_item.boundingRect().height()
