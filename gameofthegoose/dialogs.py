@@ -78,11 +78,6 @@ class SkipTheTurnDialog(Dialog):
         question_text.setText(s)
         layout.addWidget(question_text)
 
-        self.__spin_box = QSpinBox()
-        self.__spin_box.setMinimum(1)
-        self.__spin_box.setMaximum(6)
-        layout.addWidget(self.__spin_box)
-
         button_box = QDialogButtonBox()
         button_box.setStandardButtons(QDialogButtonBox.StandardButton.Ok)
         button_box.setCenterButtons(True)

@@ -1,14 +1,17 @@
 from __future__ import annotations
 from typing import Optional, List, TYPE_CHECKING
 
+from enum import Enum
 from PySide6.QtCore import QPoint, Qt
 from PySide6.QtGui import QPixmap, QPen, QBrush, QColor
 from PySide6.QtWidgets import QGraphicsItemGroup, QGraphicsItem, QGraphicsRectItem, QGraphicsTextItem, \
     QGraphicsPixmapItem
 
-from gameofthegoose.dialogs import QuizDialog, ChallengeDialog
+from gameofthegoose.dialogs import QuizDialog, ChallengeDialog, RollTheDiceDialog, SkipTheTurnDialog, YesDialog, \
+    NoDialog
 
 if TYPE_CHECKING:
+    from gameofthegoose import Game
     from gameofthegoose.teams import Team
 
 
@@ -39,6 +42,11 @@ class Challenge:
 
 
 class Box(QGraphicsItemGroup):
+
+    class Result(Enum):
+        FINISH_THE_TURN = 0
+        GO_ON = 1
+        CAME_BACK = 2
 
     def __init__(self,
                  pixmap: Optional[QPixmap] = None,
@@ -107,8 +115,16 @@ class Box(QGraphicsItemGroup):
         p = self.__team_pos.pop(team)
         self.__pos.append(p)
 
-    def execute(self, team: Team) -> bool:
+    def pre_execute(self, game: Game) -> bool:
+        team = game.current_team()
+        dialog = RollTheDiceDialog(team)
+        dialog.exec_()
+        val = dialog.dice_value()
+        game.move_team(team, val)
         return True
+
+    def post_execute(self, game: Game) -> Box.Result:
+        return Box.Result.FINISH_THE_TURN
 
 
 class StartBox(Box):
@@ -130,10 +146,19 @@ class QuizBox(Box):
 
         self.__quiz = quiz
 
-    def execute(self, team: Team) -> bool:
+    def post_execute(self, game: Game) -> Box.Result:
+        ret_value = Box.Result.FINISH_THE_TURN
         dialog = QuizDialog(self.__quiz)
         dialog.exec_()
-        return dialog.quiz_result()
+        result = dialog.quiz_result()
+        if not result:
+            dialog = NoDialog()
+            dialog.exec_()
+            ret_value = Box.Result.CAME_BACK
+        else:
+            dialog = YesDialog()
+            dialog.exec_()
+        return ret_value
 
 
 class ChallengeBox(Box):
@@ -143,10 +168,19 @@ class ChallengeBox(Box):
 
         self.__challenge = challenge
 
-    def execute(self, team: Team) -> bool:
+    def post_execute(self, game: Game) -> Box.Result:
+        ret_value = Box.Result.FINISH_THE_TURN
         dialog = ChallengeDialog(self.__challenge)
         dialog.exec_()
-        return dialog.challenge_result()
+        result = dialog.challenge_result()
+        if not result:
+            dialog = NoDialog()
+            dialog.exec_()
+            ret_value = Box.Result.CAME_BACK
+        else:
+            dialog = YesDialog()
+            dialog.exec_()
+        return ret_value
 
 
 class SkipTurnBox(Box):
@@ -154,11 +188,38 @@ class SkipTurnBox(Box):
     def __init__(self, parent: Optional[QGraphicsItem] = None):
         Box.__init__(self, QPixmap(":images/boxes/rest.png"), parent)
 
-    def execute(self, team: Team) -> bool:
-        team.skip_turn = True
-        return True
+    def pre_execute(self, game: Game) -> bool:
+        ret_val = False
+        team = game.current_team()
+        if not team.skip_turn:
+            team = game.current_team()
+            dialog = RollTheDiceDialog(team)
+            dialog.exec_()
+            val = dialog.dice_value()
+            game.move_team(team, val)
+            ret_val = True
+        else:
+            dialog = SkipTheTurnDialog(team)
+            dialog.exec_()
+            team.skip_turn = False
+        return ret_val
+
+    def post_execute(self, game: Game) -> Box.Result:
+        game.current_team().skip_turn = True
+        return Box.Result.FINISH_THE_TURN
 
 
 class RollTheDiceAgainBox(Box):
     def __init__(self, parent: Optional[QGraphicsItem] = None):
         Box.__init__(self, QPixmap(":images/boxes/dice.png"), parent)
+
+    def pre_execute(self, game: Game) -> bool:
+        return True
+
+    def post_execute(self, game: Game) -> Box.Result:
+        team = game.current_team()
+        dialog = RollTheDiceDialog(team)
+        dialog.exec_()
+        val = dialog.dice_value()
+        game.move_team(team, val)
+        return Box.Result.GO_ON

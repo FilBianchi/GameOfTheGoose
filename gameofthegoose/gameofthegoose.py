@@ -1,17 +1,18 @@
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import List
+from logging import getLogger
 
-from PySide6.QtCore import QObject, Signal, Qt, QPoint, QLine, QFile, QIODevice
-from PySide6.QtGui import QPen, QColor, QBrush, QPixmap, QRadialGradient, QFont
-from PySide6.QtWidgets import QGraphicsScene, QGraphicsLineItem, QGraphicsItem, QGraphicsItemGroup, QGraphicsRectItem, \
-    QGraphicsTextItem, QGraphicsPixmapItem, QGraphicsEllipseItem, QGraphicsWidget, QGraphicsProxyWidget, QRadioButton
+from PySide6.QtCore import QPoint, QLine, QFile, QIODevice
+from PySide6.QtGui import QPen, QColor, QPixmap
+from PySide6.QtWidgets import QGraphicsLineItem, QGraphicsItemGroup, QGraphicsPixmapItem
 from PySide6.QtXml import QDomDocument, QDomElement
 
 from gameofthegoose.boxes import Box, StartBox, FinishBox, Quiz, QuizBox, Challenge, ChallengeBox, SkipTurnBox, \
     RollTheDiceAgainBox
-from gameofthegoose.dialogs import RollTheDiceDialog, QuizDialog, SkipTheTurnDialog, YesDialog, NoDialog
 from gameofthegoose.teams import Team
+
+logging = getLogger(__name__)
 
 
 class Game(QGraphicsItemGroup):
@@ -143,46 +144,36 @@ class Game(QGraphicsItemGroup):
             self.addToGroup(team)
 
     def next(self):
-        team = self.__teams[self.__team_idx]
-        if not team.skip_turn:
-            old_idx = team.box().idx
-            dialog = RollTheDiceDialog(team)
-            dialog.exec_()
-            val = dialog.dice_value()
-            self.__move_team(team, val)
-            box = team.box()
 
-            if type(box) == RollTheDiceAgainBox:
-                dialog = RollTheDiceDialog(team)
-                dialog.exec_()
-                val = dialog.dice_value()
-                self.__move_team(team, val)
+        team = self.current_team()
+        box = team.box()
+        old_idx = box.idx
+
+        run = True
+        while run:
+            ret = box.pre_execute(self)
+            if ret:
                 box = team.box()
-            elif type(box) == SkipTurnBox:
-                pass
-            else:
-                result = box.execute(team)
-                if not result:
-                    dialog = NoDialog()
-                    dialog.exec_()
+                result = box.post_execute(self)
+                if result == Box.Result.FINISH_THE_TURN:
+                    run = False
+                elif result == Box.Result.CAME_BACK:
                     team.set_box(self.__boxes[old_idx])
-                else:
-                    dialog = YesDialog()
-                    dialog.exec_()
-        else:
-            dialog = SkipTheTurnDialog(team)
-            dialog.exec_()
-            team.skip_turn = False
+                    run = False
+                elif result == Box.Result.GO_ON:
+                    run = True
+            else:
+                run = False
 
         self.__next_team()
 
     def finish(self):
         pass
 
-    def set_box_result(self, result: bool):
-        pass
+    def current_team(self):
+        return self.__teams[self.__team_idx]
 
-    def __move_team(self, team: Team, val: int):
+    def move_team(self, team: Team, val: int):
         box = team.box()
         idx = box.idx + val
         team.set_box(self.__boxes[idx])
