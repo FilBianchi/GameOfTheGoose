@@ -11,6 +11,8 @@ class ControllerDialog(QDialog, Ui_ControllerDialog):
         QDialog.__init__(self)
         self.setupUi(self)
 
+        self.setWindowTitle("Controller")
+
         self.nextPushButton.clicked.connect(self.clicked)
 
 

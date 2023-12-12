@@ -131,3 +131,6 @@ class TeamDialog(QDialog, Ui_TeamDialog):
             dialog.exec_()
             self.tableView.model().setData(index, dialog.current_pixmap())
             self.tableView.resizeRowToContents(index.row())
+
+    def get_teams(self) -> List[Team]:
+        return self.__teams

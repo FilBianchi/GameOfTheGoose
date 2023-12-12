@@ -158,15 +158,17 @@ class Game(QGraphicsItemGroup):
                 val = dialog.dice_value()
                 self.__move_team(team, val)
                 box = team.box()
-
-            result = box.execute(team)
-            if not result:
-                dialog = NoDialog()
-                dialog.exec_()
-                team.set_box(self.__boxes[old_idx])
+            elif type(box) == SkipTurnBox:
+                pass
             else:
-                dialog = YesDialog()
-                dialog.exec_()
+                result = box.execute(team)
+                if not result:
+                    dialog = NoDialog()
+                    dialog.exec_()
+                    team.set_box(self.__boxes[old_idx])
+                else:
+                    dialog = YesDialog()
+                    dialog.exec_()
         else:
             dialog = SkipTheTurnDialog(team)
             dialog.exec_()
