@@ -74,7 +74,6 @@ class TeamTableModel(QAbstractTableModel):
                 self.__teams[row].set_color(value)
             if col == 2:
                 self.__teams[row].set_pixmap(value)
-                print("NEW PIXMAP:", value)
         return True
 
     def insertRows(self, row: int, count: int, parent: Union[QModelIndex, QPersistentModelIndex] = ...) -> bool:

@@ -4,7 +4,7 @@ from PySide6.QtCore import Qt
 from PySide6.QtGui import QFont, QPixmap
 from PySide6.QtWidgets import QGraphicsTextItem, QGraphicsProxyWidget, QRadioButton, QGraphicsItemGroup, \
     QGraphicsPixmapItem, QGraphicsItem, QButtonGroup, QVBoxLayout, QGroupBox, QFrame, QPushButton, QDialog, QLabel, \
-    QSpinBox, QDialogButtonBox, QMessageBox
+    QSpinBox, QDialogButtonBox, QMessageBox, QHBoxLayout
 
 if TYPE_CHECKING:
     from gameofthegoose.boxes import Quiz, Challenge
@@ -102,13 +102,17 @@ class QuizDialog(Dialog):
         question_text.setFont(font)
         question_text.setText(quiz.question())
         layout.addWidget(question_text)
+
+        font = QFont("Times", 14)
         self.__radio_buttons: List[QRadioButton] = []
         for answer in quiz.answers():
+            h_layout = QHBoxLayout()
             radio_button = QRadioButton()
             radio_button.setFont(font)
             radio_button.setText(answer)
-            layout.addWidget(radio_button)
+            h_layout.addWidget(radio_button)
             self.__radio_buttons.append(radio_button)
+            layout.addLayout(h_layout)
 
         button_box = QDialogButtonBox()
         button_box.setStandardButtons(QDialogButtonBox.StandardButton.Ok)
