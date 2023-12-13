@@ -116,11 +116,7 @@ class Box(QGraphicsItemGroup):
         self.__pos.append(p)
 
     def pre_execute(self, game: Game) -> bool:
-        team = game.current_team()
-        dialog = RollTheDiceDialog(team)
-        dialog.exec_()
-        val = dialog.dice_value()
-        game.move_team(team, val)
+        game.roll_the_dice()
         return True
 
     def post_execute(self, game: Game) -> Box.Result:
@@ -192,11 +188,7 @@ class SkipTurnBox(Box):
         ret_val = False
         team = game.current_team()
         if not team.skip_turn:
-            team = game.current_team()
-            dialog = RollTheDiceDialog(team)
-            dialog.exec_()
-            val = dialog.dice_value()
-            game.move_team(team, val)
+            game.roll_the_dice()
             ret_val = True
         else:
             dialog = SkipTheTurnDialog(team)
@@ -217,9 +209,5 @@ class RollTheDiceAgainBox(Box):
         return True
 
     def post_execute(self, game: Game) -> Box.Result:
-        team = game.current_team()
-        dialog = RollTheDiceDialog(team)
-        dialog.exec_()
-        val = dialog.dice_value()
-        game.move_team(team, val)
+        game.roll_the_dice()
         return Box.Result.GO_ON

@@ -176,3 +176,28 @@ class NoDialog(QDialog):
         pixmap = QPixmap(":/images/no.jpg")
         self._background.setPixmap(pixmap)
         layout.addWidget(self._background)
+
+
+class WinnerDialog(QDialog):
+
+    def __init__(self, team: Team, parent: Optional[QGraphicsItem] = None):
+        QDialog.__init__(self, parent)
+
+        layout = QVBoxLayout(self)
+        self._background = QLabel()
+        pixmap = QPixmap(":/images/winner.png")
+        self._background.setPixmap(pixmap)
+        layout.addWidget(self._background)
+
+        s = "The winner is {}!".format(team.name())
+
+        font = QFont("Times", 20)
+
+        layout = QVBoxLayout(self._background)
+        layout.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignTop)
+
+        text = QLabel()
+        text.setWordWrap(True)
+        text.setFont(font)
+        text.setText(s)
+        layout.addWidget(text)

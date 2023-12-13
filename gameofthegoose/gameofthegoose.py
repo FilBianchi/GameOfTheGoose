@@ -10,6 +10,7 @@ from PySide6.QtXml import QDomDocument, QDomElement
 
 from gameofthegoose.boxes import Box, StartBox, FinishBox, Quiz, QuizBox, Challenge, ChallengeBox, SkipTurnBox, \
     RollTheDiceAgainBox
+from gameofthegoose.dialogs import RollTheDiceDialog, WinnerDialog
 from gameofthegoose.teams import Team
 
 logging = getLogger(__name__)
@@ -176,7 +177,23 @@ class Game(QGraphicsItemGroup):
     def move_team(self, team: Team, val: int):
         box = team.box()
         idx = box.idx + val
-        team.set_box(self.__boxes[idx])
+        if idx < (len(self.__boxes) - 1):
+            team.set_box(self.__boxes[idx])
+        else:
+            team.set_box(self.__boxes[(len(self.__boxes) - 1)])
+            team = self.current_team()
+            dialog = WinnerDialog(team)
+            dialog.exec_()
+
+    def roll_the_dice(self):
+        team = self.current_team()
+        box = team.box()
+        start_idx = box.idx
+        if start_idx < (len(self.__boxes) - 1):
+            dialog = RollTheDiceDialog(team)
+            dialog.exec_()
+            val = dialog.dice_value()
+            self.move_team(team, val)
 
     def __next_team(self):
         self.__team_idx += 1
