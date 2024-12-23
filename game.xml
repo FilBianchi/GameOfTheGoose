@@ -29,7 +29,7 @@
 		<answer text="3 *" />
 		<answer text="4" />
 	</quiz>
-	<challenge text="Sbrogliate le mezze corde in meno di 5min" />
+	<challenge text="Sbrogliate la corda in meno di 5min" />
 	<quiz question="Da dove deriva nome monte Rosa?">
 		<answer text="Tinta rosa alba" />
 		<answer text="Dal latino rosia, ghiacciaio *" />
@@ -70,7 +70,7 @@
 		<answer text="1500" />
 		<answer text="1800" />
 	</quiz>
-	<challenge text="Bendati, fare un catena di rinvii" />
+	<challenge text="Bendati, fare un catena di moschettoni a ghiera" />
 	<quiz question="Il Monte Cimone in che regione si trova?">
 		<answer text="Piemonte" />
 		<answer text="Liguria" />
